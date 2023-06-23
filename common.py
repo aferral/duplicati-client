@@ -12,6 +12,8 @@ import compatibility
 from dateutil import tz
 
 
+txt_out=[]
+
 # Common function for validating that required config fields are present
 def validate_config(data):
     valid = True
@@ -86,8 +88,15 @@ def load_parameters(data, args):
             return args
 
 
+def clear_txt():
+    n=len(txt_out)
+    for i in range(n):
+        txt_out.pop()
+
+
 # Common function for logging messages
 def log_output(text, important, code=None):
+    txt_out.append(text)
     # Determine whether the message should be displayed in stdout
     if config.VERBOSE is False and important is False:
         return
