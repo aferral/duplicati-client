@@ -18,9 +18,7 @@ from os.path import splitext
 from requests_wrapper import requests_wrapper as requests
 
 
-def main(**args):
-    # Command method
-    method = sys.argv[1]
+def main(method,**args):
 
     if method == "version":
         message = "Duplicati client version "
