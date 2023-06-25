@@ -19,9 +19,9 @@ def get_last_success_last_error():
 
 
     last_success=backup_info.get('LastBackupFinished')
-    last_success=datetime.strptime(last_success,'%Y%m%dT%H%M%SZ') if last_success is not None else None
+    last_success=datetime.strptime(last_success,'%Y%m%dT%H%M%SZ') if last_success is not None else datetime(1979,1,1) 
     last_error=backup_info.get('LastErrorDate')
-    last_error=datetime.strptime(last_error,'%Y%m%dT%H%M%SZ') if last_error is not None else None 
+    last_error=datetime.strptime(last_error,'%Y%m%dT%H%M%SZ') if last_error is not None else datetime(1979,1,1) 
     return last_success,last_error
 
 
@@ -96,11 +96,11 @@ if __name__ == '__main__':
     max_time=now + timeout
     while time.time() < max_time:
 
-        new_success,new_error=get_last_success_last_error()
-        if new_success > last_success:
+        new_success,new_error=get_last_success_last_error() 
+        if (new_success > last_success):
             exit_code=0
             break
-        if new_error > last_error:
+        elif new_error > last_error:
             exit_code=1
             break
         time.sleep(poll_interval)
